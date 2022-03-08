@@ -2,6 +2,7 @@ import requests
 from selectolax.lexbor import LexborHTMLParser
 import json
 
+
 HEADERS = ({
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
     'Accept-language': 'en-us, en;q=0.5'
@@ -14,6 +15,7 @@ class Video:
         self.thumbnail_ = string['thumbnail']['thumbnails'][0]['url']
         self.id_ = string['videoId']
         self.url_ = 'https://www.youtube.com/watch?v=' + self.id_
+
 
 
 def get_results_from_keyword(keyword):
@@ -37,9 +39,12 @@ def get_results_from_keyword(keyword):
         try: video_objs.append(Video(video['videoRenderer']))
         except KeyError: continue
 
-    for video_obj in video_objs:
-        print(video_obj.title_, video_obj.channel_, video_obj.thumbnail_, video_obj.id_, video_obj.url_, sep = '\n')
-    print('Number of results:', len(video_objs))
+    # for video_obj in video_objs:
+    #     print(video_obj.title_, video_obj.channel_, video_obj.thumbnail_, video_obj.id_, video_obj.url_, sep = '\n', end = '\n\n')
+    # print('Number of results:', len(video_objs))
+
+    return video_objs
+
 
 if __name__ == '__main__':
     get_results_from_keyword(keyword = 'best nightcore 2022')
